@@ -4,15 +4,16 @@ const Letter = require('./letter.js')
 function Word(text) {
   this.letters = []
 
-  this.addChar = function (char) {
+  this.addLetter = function (char) {
     let letter = new Letter(char)
     this.letters.push(letter)
+    return letter
   }
 
   this.addWord = function (text) {
     this.letters = []
     text.split('').forEach(char => {
-      this.addChar(char)
+      this.addLetter(char)
     })
   }
 
