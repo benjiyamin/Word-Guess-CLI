@@ -18,6 +18,7 @@ function Letter(char) {
     } else if (!char.match(/[a-z]/i)) {
       throw Error('char is not in the alphabet')
     }
+    return this.guessed
   }
 }
 
