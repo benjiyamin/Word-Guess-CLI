@@ -1,44 +1,56 @@
-
 const Letter = require('./letter.js')
 
 
-function Word() {
+function Word(text) {
   this.letters = []
-  this.guesses = []
+  //if (text) {
+  //  this.addWord(text)
+  //}
+  //this.guesses = []
 
-  this.addChar = function(char) {
+  this.addChar = function (char) {
     let letter = new Letter(char)
     this.letters.push(letter)
   }
 
-  this.addWord = function(word) {
-    word.forEach(char => {
+  this.addWord = function (text) {
+    this.letters = []
+    text.split('').forEach(char => {
       this.addChar(char)
     })
   }
 
-  this.displayed = function(separator = ' ') {
+  if (text) this.addWord(text)
+
+  this.displayed = function (separator = ' ') {
     let output = ''
-    this.letters.forEach(letter => {
-      output += ' ' + letter.displayed()
-    })
+    for (let i = 0; i < this.letters.length; i++) {
+      const letter = this.letters[i];
+      output += letter.displayed()
+      if (i < this.letters.length - 1) {
+        output += separator
+      }
+    }
     return output.trim()
   }
 
-  this.guess = function(char) {
-    if (!this.charPicked(char)) {
-      this.letters.forEach(letter => {
-        letter.guess(char)
-      })
-      this.guesses.push(char)
-    }
+  this.guess = function (char) {
+    this.letters.forEach(letter => {
+      letter.guess(char)
+    })
+    //if (!this.charPicked(char)) {
+    //  this.letters.forEach(letter => {
+    //    letter.guess(char)
+    //  })
+    //  //this.guesses.push(char)
+    //}
   }
 
-  this.charPicked = function(char) {
-    return this.guesses.indexOf(char) !== -1
-  }
+  //this.charPicked = function (char) {
+  //  return this.guesses.indexOf(char) !== -1
+  //}
 
 }
 
 
-exports = Word
+module.exports = Word
