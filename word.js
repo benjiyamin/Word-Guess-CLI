@@ -3,10 +3,6 @@ const Letter = require('./letter.js')
 
 function Word(text) {
   this.letters = []
-  //if (text) {
-  //  this.addWord(text)
-  //}
-  //this.guesses = []
 
   this.addChar = function (char) {
     let letter = new Letter(char)
@@ -22,11 +18,15 @@ function Word(text) {
 
   if (text) this.addWord(text)
 
-  this.displayed = function (separator = ' ') {
+  this.displayed = function (exposed = false, separator = ' ') {
     let output = ''
     for (let i = 0; i < this.letters.length; i++) {
       const letter = this.letters[i];
-      output += letter.displayed()
+      if (exposed) {
+        output += letter.char
+      } else {
+        output += letter.displayed()
+      }
       if (i < this.letters.length - 1) {
         output += separator
       }
@@ -38,17 +38,7 @@ function Word(text) {
     this.letters.forEach(letter => {
       letter.guess(char)
     })
-    //if (!this.charPicked(char)) {
-    //  this.letters.forEach(letter => {
-    //    letter.guess(char)
-    //  })
-    //  //this.guesses.push(char)
-    //}
   }
-
-  //this.charPicked = function (char) {
-  //  return this.guesses.indexOf(char) !== -1
-  //}
 
 }
 
