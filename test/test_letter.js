@@ -1,6 +1,12 @@
 const assert = require('assert')
 
+const mocha = require('mocha')
+
 const Letter = require('../letter.js')
+
+
+const describe = mocha.describe
+const it = mocha.it
 
 
 describe('Letter()', function () {

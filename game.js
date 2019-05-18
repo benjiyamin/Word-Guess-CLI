@@ -62,7 +62,7 @@ function Game(textChoices, maxGuesses) {
   }
 
   this.won = function () {
-    return this.word.displayed() === this.word.displayed(exposed = true)
+    return this.word.displayed() === this.word.displayed(true)
   }
 
   this.lost = function () {

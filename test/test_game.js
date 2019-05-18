@@ -1,6 +1,12 @@
 const assert = require('assert')
 
+const mocha = require('mocha')
+
 const Game = require('../game.js')
+
+
+const describe = mocha.describe
+const it = mocha.it
 
 
 describe('Game()', function () {
@@ -9,27 +15,27 @@ describe('Game()', function () {
 
     it('should throw an error if a char is too long', function () {
       assert.throws(function () {
-        let game = new Game(textChoices = ['foo'], maxGuesses = 1)
+        let game = new Game(['foo'], 1)
         game.guess('ab')
       }, Error)
     })
 
     it('should throw an error if a char is too short', function () {
       assert.throws(function () {
-        let game = new Game(textChoices = ['foo'], maxGuesses = 1)
+        let game = new Game(['foo'], 1)
         game.guess('')
       }, Error)
     })
 
     it('should throw an error if char is not defined', function () {
       assert.throws(function () {
-        let game = new Game(textChoices = ['foo'], maxGuesses = 1)
+        let game = new Game(['foo'], 1)
         game.guess()
       }, Error)
     })
 
     it('should add guessed characters to the .guesses array', function () {
-      let game = new Game(textChoices = ['foo'], maxGuesses = 2)
+      let game = new Game(['foo'], 2)
       game.guess('g')
       let actual = game.guesses
       let expected = ['g']
@@ -37,7 +43,7 @@ describe('Game()', function () {
     })
 
     it('should not accept guesses more than once', function () {
-      let game = new Game(textChoices = ['foo'], maxGuesses = 2)
+      let game = new Game(['foo'], 2)
       game.guess('g')
       let guessed1 = game.guesses
       game.guess('g')
@@ -50,7 +56,7 @@ describe('Game()', function () {
   describe('.remainingGuesses()', function () {
 
     it('should decrease by one when an incorrect guess is made', function () {
-      let game = new Game(textChoices = ['foo'], maxGuesses = 3)
+      let game = new Game(['foo'], 3)
       let guesses1 = game.remainingGuesses()
       game.guess('x')
       let guesses2 = game.remainingGuesses()
@@ -62,7 +68,7 @@ describe('Game()', function () {
   describe('.won()', function () {
 
     it('should be false if solution not found', function () {
-      let game = new Game(textChoices = ['foo'], maxGuesses = 3)
+      let game = new Game(['foo'], 3)
       game.guess('f')
       let actual = game.won()
       let expected = false
@@ -70,7 +76,7 @@ describe('Game()', function () {
     })
 
     it('should be true if solution is found', function () {
-      let game = new Game(textChoices = ['foo'], maxGuesses = 3)
+      let game = new Game(['foo'], 3)
       game.guess('f')
       game.guess('o')
       let actual = game.won()
@@ -83,7 +89,7 @@ describe('Game()', function () {
   describe('.lost()', function () {
 
     it('should be true if solution not found and out of remaining guesses', function () {
-      let game = new Game(textChoices = ['foo'], maxGuesses = 1)
+      let game = new Game(['foo'], 1)
       game.guess('f')
       let actual = game.lost()
       let expected = true
@@ -91,7 +97,7 @@ describe('Game()', function () {
     })
 
     it('should be false if solution is found but guesses remaining', function () {
-      let game = new Game(textChoices = ['foo'], maxGuesses = 3)
+      let game = new Game(['foo'], 3)
       game.guess('f')
       game.guess('o')
       let actual = game.lost()

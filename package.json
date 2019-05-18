@@ -4,7 +4,8 @@
   "description": "Word Guess CLI",
   "main": "index.js",
   "scripts": {
-    "test": "mocha"
+    "test": "mocha",
+    "lint": "eslint ."
   },
   "repository": {
     "type": "git",
@@ -17,6 +18,7 @@
   },
   "homepage": "https://github.com/benjiyamin/Word-Guess-CLI#readme",
   "devDependencies": {
+    "eslint": "^5.16.0",
     "mocha": "^6.1.4"
   }
 }
