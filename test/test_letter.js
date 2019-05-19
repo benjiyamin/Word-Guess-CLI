@@ -11,6 +11,25 @@ const it = mocha.it
 
 describe('Letter()', function () {
 
+  describe('.displayed()', function() {
+
+    it('should show an underscore if a letter has not been guessed', function() {
+      let a = new Letter('a')
+      let actual = a.displayed()
+      let expected = '_'
+      assert.equal(actual, expected)
+    })
+
+    it('should show a letter if a letter has been guessed', function() {
+      let a = new Letter('a')
+      a.guess('a')
+      let actual = a.displayed()
+      let expected = 'a'
+      assert.equal(actual, expected)
+    })
+
+  })
+
   describe('.guess(char)', function () {
 
     it('should throw an error if a char is too long', function () {

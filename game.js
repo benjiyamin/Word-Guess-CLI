@@ -9,19 +9,7 @@ function Game(textChoices, maxGuesses) {
   this.wins = 0
   this.losses = 0
 
-  this.guess = function (char) {
-    let gameOverBeforeGuess = this.gameOver()
-    if (!this.charPicked(char) && !this.gameOver()) {
-      this.word.guess(char)
-      this.guesses.push(char)
-    }
-    if (this.won() && !gameOverBeforeGuess) {
-      this.wins += 1
-    } else if (this.lost() && !gameOverBeforeGuess) {
-      this.losses += 1
-    }
-  }
-
+  /*
   this.charIsValid = function (char) {
     let chars = []
     this.word.letters.forEach(letter => {
@@ -29,10 +17,7 @@ function Game(textChoices, maxGuesses) {
     })
     return chars.indexOf(char) !== -1
   }
-
-  this.charPicked = function (char) {
-    return this.guesses.indexOf(char) !== -1
-  }
+  */
 
   /*
   this.validGuesses = function () {
@@ -46,12 +31,6 @@ function Game(textChoices, maxGuesses) {
   }
   */
 
-  this.remainingGuesses = function () {
-    //console.log(this.maxGuesses, this.guesses.length, this.validGuesses().length)
-    //return this.maxGuesses - this.guesses.length + this.validGuesses().length
-    return this.maxGuesses - this.guesses.length
-  }
-
   this.newGame = function (maxGuesses) {
     let text = textChoices[Math.floor(Math.random() * textChoices.length)]
     this.letters = text.split('')
@@ -59,6 +38,12 @@ function Game(textChoices, maxGuesses) {
       this.maxGuesses = maxGuesses
     }
     this.guesses = []
+  }
+
+  this.remainingGuesses = function () {
+    //console.log(this.maxGuesses, this.guesses.length, this.validGuesses().length)
+    //return this.maxGuesses - this.guesses.length + this.validGuesses().length
+    return this.maxGuesses - this.guesses.length
   }
 
   this.won = function () {
@@ -75,6 +60,23 @@ function Game(textChoices, maxGuesses) {
 
   this.gameOver = function () {
     return this.won() || this.lost()
+  }
+
+  this.charPicked = function (char) {
+    return this.guesses.indexOf(char) !== -1
+  }
+
+  this.guess = function (char) {
+    let gameOverBeforeGuess = this.gameOver()
+    if (!this.charPicked(char) && !this.gameOver()) {
+      this.word.guess(char)
+      this.guesses.push(char)
+    }
+    if (this.won() && !gameOverBeforeGuess) {
+      this.wins += 1
+    } else if (this.lost() && !gameOverBeforeGuess) {
+      this.losses += 1
+    }
   }
 }
 
