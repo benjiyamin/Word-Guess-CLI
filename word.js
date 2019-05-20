@@ -10,23 +10,23 @@ function Word(text) {
     return letter
   }
 
-  this.addWord = function (text) {
+  this.setText = function (text) {
     this.letters = []
     text.split('').forEach(char => {
       this.addLetter(char)
     })
   }
 
-  if (text) this.addWord(text)
+  if (text) this.setText(text)
 
-  this.displayed = function (exposed = false, separator = ' ') {
+  this.toString = function (exposed = false, separator = ' ') {
     let output = ''
     for (let i = 0; i < this.letters.length; i++) {
       const letter = this.letters[i];
       if (exposed) {
         output += letter.char
       } else {
-        output += letter.displayed()
+        output += letter.toString()
       }
       if (i < this.letters.length - 1) {
         output += separator
@@ -39,6 +39,18 @@ function Word(text) {
     this.letters.forEach(letter => {
       letter.guess(char)
     })
+  }
+
+  this.chars = function() {
+    let output = []
+    this.letters.forEach(letter => {
+      output.push(letter.char)
+    })
+    return output
+  }
+
+  this.uniqueChars = function() {
+    return Array.from(new Set(this.chars()))
   }
 
 }

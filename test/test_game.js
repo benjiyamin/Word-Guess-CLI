@@ -90,7 +90,8 @@ describe('Game()', function () {
 
     it('should be true if solution not found and out of remaining guesses', function () {
       let game = new Game(['foo'], 1)
-      game.guess('f')
+      game.guess('f') // Got one right
+      game.guess('x') // Got one wrong
       let actual = game.lost()
       let expected = true
       assert.equal(actual, expected)

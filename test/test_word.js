@@ -14,8 +14,8 @@ describe('Word()', function () {
   describe('.displayed()', function () {
 
     it('should display all blanks if no guesses made', function () {
-      let foo = new Word('foo')
-      let actual = foo.displayed()
+      //let foo = new Word('foo')
+      let actual = new Word('foo')
       let expected = '_ _ _'
       assert.equal(actual, expected)
     })
@@ -23,7 +23,7 @@ describe('Word()', function () {
     it('should reveal letters if correct guess made', function () {
       let foo = new Word('foo')
       foo.guess('f')
-      let actual = foo.displayed()
+      let actual = foo
       let expected = 'f _ _'
       assert.equal(actual, expected)
     })
