@@ -10,6 +10,11 @@ let maxGuesses = 8
 let game = new Game(textChoices, maxGuesses)
 
 
+function isLetter(x) {
+  return x.length === 1 && x.match(/[a-z]/i);
+}
+
+
 function printDisplay() {
   var table = new Table({
     style: {
@@ -57,8 +62,14 @@ function promptGuess() {
     }])
     .then(function (answers) {
       let char = answers.guess
-      game.guess(char)
-      printDisplay()
+      if (isLetter(char)) {
+        game.guess(char)
+        printDisplay()
+      } else {
+        printDisplay()
+        console.log('Not a valid input. Input must be a single letter.')
+      }
+
       if (!game.gameOver()) {
         // Game still in progress
         promptGuess()
