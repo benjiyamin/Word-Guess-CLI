@@ -1,11 +1,11 @@
 const inquirer = require('inquirer')
 const Table = require('cli-table3')
 
-const choices = require('./choices')
+const bank = require('./bank')
 const Game = require('./game')
 
 
-let textChoices = choices
+let textChoices = bank
 let maxGuesses = 8
 let game = new Game(textChoices, maxGuesses)
 
