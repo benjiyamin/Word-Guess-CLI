@@ -11,6 +11,12 @@ const it = mocha.it
 
 describe('Word()', function () {
 
+  describe('.addLetter()', function() {
+
+    //it('should display all blank')
+
+  })
+
   describe('.displayed()', function () {
 
     it('should display all blanks if no guesses made', function () {

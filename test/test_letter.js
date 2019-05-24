@@ -9,17 +9,48 @@ const describe = mocha.describe
 const it = mocha.it
 
 
-describe('Letter()', function () {
+describe('Letter(char)', function () {
 
-  describe('.toString()', function() {
+  it('should throw an error if char is not defined', function () {
+    assert.throws(function () {
+      new Letter()
+    }, Error)
+  })
 
-    it('should show an underscore if a letter has not been guessed', function() {
+  describe('.validateChar(char)', function () {
+
+    it('should throw an error if a char is too long', function () {
+      assert.throws(function () {
+        let a = new Letter('a')
+        a.validateChar('ab')
+      }, Error)
+    })
+
+    it('should throw an error if a char is too short', function () {
+      assert.throws(function () {
+        let a = new Letter('a')
+        a.validateChar('')
+      }, Error)
+    })
+
+    it('should throw an error if char is not defined', function () {
+      assert.throws(function () {
+        let a = new Letter('a')
+        a.validateChar()
+      }, Error)
+    })
+
+  })
+
+  describe('.toString()', function () {
+
+    it('should show an underscore if a letter has not been guessed', function () {
       let actual = new Letter('a')
       let expected = '_'
       assert.equal(actual, expected)
     })
 
-    it('should show a letter if a letter has been guessed', function() {
+    it('should show a letter if a letter has been guessed', function () {
       let a = new Letter('a')
       a.guess('a')
       let actual = a
