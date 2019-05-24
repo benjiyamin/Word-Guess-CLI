@@ -83,13 +83,13 @@ function promptGuess() {
     })
 }
 
-function promptWin() {
+function promptGameOver(msg) {
   inquirer
     .prompt([{
       type: 'confirm',
       name: 'playAgain',
       default: true,
-      message: 'Congrats! You won this round. Play Again?'
+      message: msg
     }])
     .then(function (answers) {
       if (answers.playAgain) {
@@ -102,24 +102,13 @@ function promptWin() {
     })
 }
 
+function promptWin() {
+  promptGameOver('Congrats! You won this round. Play Again?')
+}
+
 
 function promptLoss() {
-  inquirer
-    .prompt([{
-      type: 'confirm',
-      name: 'playAgain',
-      default: true,
-      message: 'Sorry.. You lost this time. Try again?'
-    }])
-    .then(function (answers) {
-      if (answers.playAgain) {
-        game.newGame()
-        printDisplay()
-        promptGuess()
-      } else {
-        process.exit()
-      }
-    })
+  promptGameOver('Sorry.. You lost this time. Try again?')
 }
 
 printDisplay()
