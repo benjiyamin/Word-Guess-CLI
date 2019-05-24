@@ -9,11 +9,16 @@ const describe = mocha.describe
 const it = mocha.it
 
 
-describe('Word()', function () {
+describe('Word(text)', function () {
 
-  describe('.addLetter()', function() {
+  describe('.letters', function() {
 
-    //it('should display all blank')
+    it('should be empty array if no text defined', function() {
+      let word = new Word()
+      let actual = word.letters
+      let expected = []
+      assert.deepEqual(actual, expected)
+    })
 
   })
 
