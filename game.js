@@ -9,16 +9,6 @@ function Game(textChoices, maxGuesses) {
   this.wins = 0
   this.losses = 0
 
-  /*
-  this.charIsValid = function (char) {
-    let chars = []
-    this.word.letters.forEach(letter => {
-      chars.push(letter.char)
-    })
-    return chars.indexOf(char) !== -1
-  }
-  */
-
   this.validGuesses = function () {
     let output = []
     this.word.uniqueChars().forEach(char => {
@@ -31,7 +21,6 @@ function Game(textChoices, maxGuesses) {
 
   this.newGame = function (maxGuesses) {
     let text = textChoices[Math.floor(Math.random() * textChoices.length)]
-    //this.letters = text.split('')
     this.word.setText(text)
     if (maxGuesses) {
       this.maxGuesses = maxGuesses
@@ -66,7 +55,6 @@ function Game(textChoices, maxGuesses) {
 
   this.guess = function (char) {
     let gameOverBeforeGuess = this.gameOver()
-    //if (!this.charPicked(char) && isLetter(char) && !this.gameOver()) {
     if (!this.charPicked(char) && !this.gameOver()) {
       this.word.guess(char)
       this.guesses.push(char)
