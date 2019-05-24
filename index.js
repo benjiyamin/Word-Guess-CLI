@@ -62,7 +62,10 @@ function promptGuess() {
     }])
     .then(function (answers) {
       let char = answers.guess
-      if (isLetter(char)) {
+      if (game.charPicked(char)) {
+        printDisplay()
+        console.log(`${char.toUpperCase()} already picked.`)
+      } else if (isLetter(char)) {
         game.guess(char)
         printDisplay()
       } else {
@@ -97,6 +100,7 @@ function promptGameOver(msg) {
         printDisplay()
         promptGuess()
       } else {
+        console.log('Thanks for playing! Exiting..')
         process.exit()
       }
     })
