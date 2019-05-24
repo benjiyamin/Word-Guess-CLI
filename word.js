@@ -41,7 +41,7 @@ function Word(text) {
     })
   }
 
-  this.chars = function() {
+  this.chars = function () {
     let output = []
     this.letters.forEach(letter => {
       output.push(letter.char)
@@ -49,7 +49,7 @@ function Word(text) {
     return output
   }
 
-  this.uniqueChars = function() {
+  this.uniqueChars = function () {
     return Array.from(new Set(this.chars()))
   }
 

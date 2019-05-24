@@ -11,9 +11,21 @@ const it = mocha.it
 
 describe('Word(text)', function () {
 
-  describe('.letters', function() {
+  it('should throw an error if text is not a string', function () {
+    assert.throws(function () {
+      new Word(1)
+    }, Error)
+  })
 
-    it('should be empty array if no text defined', function() {
+  it('should throw an error if text is not in the alphabet', function () {
+    assert.throws(function () {
+      new Word("1")
+    }, Error)
+  })
+
+  describe('.letters', function () {
+
+    it('should be empty array if no text defined', function () {
       let word = new Word()
       let actual = word.letters
       let expected = []
@@ -22,7 +34,7 @@ describe('Word(text)', function () {
 
   })
 
-  describe('.displayed()', function () {
+  describe('.toString()', function () {
 
     it('should display all blanks if no guesses made', function () {
       //let foo = new Word('foo')
@@ -62,6 +74,43 @@ describe('Word(text)', function () {
         let foo = new Word('foo')
         foo.guess()
       }, Error)
+    })
+
+    it('should throw an error if char is not a string', function () {
+      assert.throws(function () {
+        let foo = new Word('foo')
+        foo.guess(1)
+      }, Error)
+    })
+
+    it('should throw an error if char is not in the alphabet', function () {
+      assert.throws(function () {
+        let foo = new Word('foo')
+        foo.guess('1')
+      }, Error)
+    })
+
+  })
+
+  describe('.chars()', function () {
+
+    it('should return array of chars from text', function () {
+      let text = 'foo'
+      let word = new Word(text)
+      let actual = word.chars()
+      let expected = text.split('')
+      assert.deepEqual(actual, expected)
+    })
+
+  })
+
+  describe('.uniqueChars()', function () {
+
+    it('should consolidate indentical letters in an array', function () {
+      let word = new Word('foo')
+      let actual = word.uniqueChars()
+      let expected = ['f', 'o']
+      assert.deepEqual(actual, expected)
     })
 
   })
